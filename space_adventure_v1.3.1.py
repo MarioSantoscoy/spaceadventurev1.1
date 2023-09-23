@@ -1,4 +1,4 @@
-import wikipedia, planets_spaceadventure
+import wikipedia, planets_spaceadventure, datetime
 
     
 rooms = ['1) Cabin.', 
@@ -59,11 +59,18 @@ laboratory_options = ["1) Calculate how many orbits complete the ISS around the 
                       ]
 
 
+
+
+
+
+
+
 def minutes_hours_days(minutes_calculated):
-    hours = (minutes_calculated // 60)
-    days = (hours // 24)
-    extra_minutes = (minutes_calculated % 60)
-    return f"{days:02d}:{hours:02d}:{extra_minutes:02d}"
+  hours = (minutes_calculated // 60)
+  days = (hours // 24)
+  extra_hours = (hours % 24)
+  extra_minutes = (minutes_calculated % 60)
+  return f"{days:02d}:{extra_hours:02d}:{extra_minutes:02d}"
   
 def main_menu():
   print('Returning...')
@@ -97,7 +104,16 @@ def room_selected_dining():
   print("Welcome to Dining room Captain " + str(user_name) + ".")
   print("These are the options we have: \n")
         
-  
+def room_selected_laboratory():
+  print("Moving to Laboratory...")
+  print()
+  print("---------- Laboratory ----------")
+  print()
+  print("Welcome to Laboratory Captain " + str(user_name) + ".")
+
+distance_between_iss_earth = 250
+time_to_do_one_orbit = 90
+
 
 print()
 print("---------- Space Adventure ----------")
@@ -264,7 +280,6 @@ while select_room != (1, 2, 3, 4):
       
       else:
         main_menu()
-        select_room = int(input('Where do you want to go?: '))
         break
   
   
@@ -343,5 +358,73 @@ while select_room != (1, 2, 3, 4):
         
       else:
         main_menu()
-        select_room = int(input('Where do you want to go?: '))
         break
+      
+  
+  elif select_room == 4:
+    room_selected_laboratory()
+    print("To show the menu, please enter the PIN")
+
+    access_pin = int(input("PIN: "))
+    while access_pin != 1234:
+      access_pin = int(input('Access deny. Please enter PIN again: '))
+    
+    if access_pin == 1234:
+      print("Access complete!")
+      print()
+    
+      print('This are the options we have:')
+      for option in laboratory_options:
+        print(option)
+      action_laboratory = int(input('What do you want to do?: '))
+      
+    while action_laboratory != (1,3):
+      if action_laboratory == 1:
+        orbits = int(input("How many orbits do you want to calculate: "))
+        calculated_time = (orbits * time_to_do_one_orbit)
+        miles_traveled = (orbits * distance_between_iss_earth)
+        print()
+        print("In " + str(orbits) + " orbits, we travel " + str(miles_traveled) + " miles on " + str(calculated_time) + " minutes.")
+        print()
+        print("Do you want to know the simplified time?")
+        print("1) Yes. \n""2) No.")
+        print()
+                    
+        simplify_time = int(input("Yes / No: "))
+        if simplify_time == 1:
+          minutes_calculated = int(input("Please enter how many minutes: "))
+          print(minutes_hours_days(minutes_calculated))
+          break
+        
+        else:
+          print("Returning...")
+          print('This are the options we have:')
+          for option in laboratory_options:
+              print(option)
+          action_laboratory = int(input('What do you want to do?: '))
+          
+      elif action_laboratory == 2:
+        print("Start emergency system?")
+        print("1) Yes.\n""2) No.") 
+        num=4
+        launch_now = int(input("Enter option: "))
+        print()
+        if launch_now == 1:
+            for x in range (1,num+1):
+                print("Starting on", num-x)
+            print("Started!")
+            print()
+
+        else:
+            print("Returning...")
+            for option in laboratory_options:
+              print(option)
+            action_laboratory = int(input("What do you want to do?: "))
+            print()
+      else:
+        main_menu()
+        break
+    
+  else:
+    print("Wrong answer, please choose again.")
+  select_room = int(input('Where do you want to go?: '))
