@@ -12,10 +12,12 @@ cabin_options = ['1) Launch.',
                  '3) Return to Select Menu.'
                  ]
 
+
 hall_options = ['1) Talk with Karen.',
                 '2) Look by the window.',
                 '3) Return to select menu.'
                 ]
+
 karen_options = ['1) Distance to planets',
                  '2) Facts about the ISS.',
                  '3) More info about ISS',
@@ -29,13 +31,27 @@ facts_about_ISS = ['1) How much time takes to ISS to do one orbit to Earth?.',
                    ]
 
 
-
-
 dining_room_options = ["1) Victor.",
                        "2) Lalo.",
                        "3) Wally.",
                        "4) Return to select menu."
                         ]
+
+victor_talk_options = ["1) What we use as operating system?",
+                      "2) Where is the location of the main server?",
+                      "3) Return to Dining room menu."
+                      ]
+
+lalo_talk_options = ['1) What we use as program system?',
+                     "2) Why we don't use other program system?",
+                     '3) Return to Dining room menu.'
+                     ]
+
+wally_talk_options = ['1) To what do the maintenance system maintain?',
+                      '2) Are all the systems OK?',
+                      '3) Return.'
+                      ]
+
 
 laboratory_options = ["1) Calculate how many orbits complete the ISS around the Earth.",
                       "2) Start emergency system.",
@@ -73,6 +89,14 @@ def room_selected_hall():
   print("Welcome to the Hall Captain " + str(user_name) + ".")
   print("These are the options we have: \n")
 
+def room_selected_dining():
+  print("Moving to dining room...")
+  print()
+  print("---------- Dining Room ----------")
+  print()
+  print("Welcome to Dining room Captain " + str(user_name) + ".")
+  print("These are the options we have: \n")
+        
   
 
 print()
@@ -238,6 +262,85 @@ while select_room != (1, 2, 3, 4):
           print(option)
         action_selected = int(input("Enter the option: "))
       
+      else:
+        main_menu()
+        select_room = int(input('Where do you want to go?: '))
+        break
+  
+  
+  elif select_room == 3:
+    for option in dining_room_options:
+      print(option)
+      
+    npc_talk = int(input('Who do you want to talk?: '))
+      
+    while npc_talk != (1, 2, 3):
+      if npc_talk == 1:
+        print("Victor: Hi Captain " + str(user_name) + ". My name is Victor. \n""Victor: I'm the manager of the operating system.")
+        print("Victor: I can provide you infor about this: ")
+        for option in victor_talk_options:
+          print(option)
+        
+        victor_info_options = int(input('Which info do you want?: '))
+        
+        if victor_info_options == 1:
+          print("We use Linux for operating system. That's because it's an open system.")
+          print()
+        elif victor_info_options == 2:
+          print("The main server is on Earth and we've a local server operating on laboratory.")
+          print()
+        else:
+          print('Returning...')
+          for option in dining_room_options:
+            print(option)
+        npc_talk = int(input('Who do you want to talk?: '))
+        
+            
+      elif npc_talk == 2:
+        print("Lalo: Hi Captain " + str(user_name) + ". My name is Lalo. \n""Lalo: I'm the manager of the program system.")
+        print("Lalo: I can provide you infor about this: ")
+        for option in lalo_talk_options:
+          print(option)
+        
+        lalo_info_options = int(input('What do you want to know?: '))
+        
+        if lalo_info_options == 1:
+          print("We use Python 3.8 for program system")
+          print()
+          
+        elif lalo_info_options == 2:
+          print("That's because Python it's a friendly system, easy to learn and get started")
+          print()
+          
+        else:
+          print('Returning...')
+          for option in dining_room_options:
+            print(option)
+        npc_talk = int(input('Who do you want to talk?: '))
+        
+        
+      elif npc_talk == 3: 
+        print("Wally: Hi Captain " + str(user_name) + ". My name is Wally. \n" "Wally:I'm the manager of the maintenance system.")
+        print("Wally: I can provide you infor about this: ")
+        for option in wally_talk_options:
+          print(option)
+          
+        wally_info_options = int(input('What do you want to know?: '))
+        
+        if wally_info_options == 1:
+          print("The maintenance system mantains all the alerts, security and emergency systems.")
+          print()
+          
+        elif wally_info_options == 2:
+          print("Yes, we launch the maintenance system everyday in the morning and night.")
+          print()
+        
+        else:
+          print('Returning...')
+          for option in dining_room_options:
+            print(option)
+        npc_talk = int(input('Who do you want to talk?: '))
+        
       else:
         main_menu()
         select_room = int(input('Where do you want to go?: '))
